@@ -1,32 +1,42 @@
 {
-  "name": "hackai_frontend",
-  "version": "0.1.0",
+  "name": "DatawiseAI",
+  "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.108",
-    "@types/react": "^18.3.5",
-    "@types/react-dom": "^18.3.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "@mui/x-date-pickers": "7.17.0",
+    "@mui/x-charts": "7.17.0",
+    "@mui/x-data-grid": "7.17.0",
+    "@mui/x-tree-view": "7.17.0",
+    "@mui/material": "6.1.0",
+    "@mui/icons-material": "6.1.0",
+    "dayjs": "1.11.13",
+    "clsx": "2.1.1",
+    "@react-spring/web": "9.7.4",
+    "@mui/x-data-grid-pro": "7.17.0",
+    "@mui/x-date-pickers-pro": "7.17.0",
+    "@emotion/react": "11.13.3",
+    "react-router-dom": "6.26.2",
+    "@emotion/styled": "11.13.0",
+    "@types/react": "18.3.5",
+	"@types/react-router-dom": "5.3.3",
+    "@types/react-dom": "18.3.0",
+
+    "typescript": "^5.0.2"
   },
+"overrides": {
+	"typescript": "^5.0.2"
+},
+
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "devDependencies": {
+    "react-scripts": "latest"
   },
   "browserslist": {
     "production": [
