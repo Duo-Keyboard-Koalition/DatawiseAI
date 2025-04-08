@@ -92,22 +92,26 @@ export default function MainGrid() {
         sx={{ mb: (theme) => theme.spacing(2) }}
       >
         <Grid size={{ sm: 12, md: 6 }}>
-          <ComplianceChecksChart/>
+          <ComplianceChecksChart />
         </Grid>
         <Grid size={{ sm: 12, md: 6 }}>
           <PageViewsBarChart />
         </Grid>
-        {data.map((card, index) => (
-          <Grid key={index} size={{ xs: 12, sm: 6, lg: 3 }}>
-            <StatCard {...card} />
-          </Grid>
-        ))}
-	{/*
-        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
-          <HighlightedCard />
-        </Grid>
-	*/}
       </Grid>
+
+      {/* Stat Cards Section */}
+      <Box sx={{ mb: 2 }}>
+        <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
+          Stat Cards
+        </Typography>
+        <Grid container spacing={2} columns={12}>
+          {data.map((card, index) => (
+            <Grid key={index} size={{ xs: 12, sm: 6, lg: 3 }}>
+              <StatCard {...card} />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
     </Box>
   );
 }
