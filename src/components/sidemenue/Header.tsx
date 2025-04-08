@@ -1,14 +1,24 @@
 import * as React from 'react';
 import { useLocation } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import CustomDatePicker from '../CustomDatePicker';
 import NavbarBreadcrumbs from '../NavbarBreadcrumbs';
 import MenuButton from '../ui/MenuButton';
 import ColorModeIconDropdown from '../theme/ColorModeIconDropdown';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import AddTodo from '../todo/AddTodo';
+import { Todo } from '../../types/Todo';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
 
-export default function Header() {
+export default function Header({ children }: { children?: React.ReactNode }) {
   const location = useLocation();
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
 
   const getBreadcrumbs = () => {
     const path = location.pathname;
@@ -16,41 +26,58 @@ export default function Header() {
     return [pageName, 'Home'];
   };
 
+  const handleDialogOpen = () => setIsDialogOpen(true);
+  const handleDialogClose = () => setIsDialogOpen(false);
+
   return (
-    <Stack
-      direction="row"
+    <AppBar
+      position="fixed"
+      color="default"
       sx={{
-        position: 'fixed',
         top: 0,
+        left: '240px',
         zIndex: 1100,
-        backgroundColor: 'background.paper',
-        width: '100%',
-        alignItems: { xs: 'flex-start', md: 'center' },
-        justifyContent: 'space-between',
-        maxWidth: { sm: '100%', md: '1700px' },
-        pt: 2, // Consistent top padding for all pages
-        px: 2,
+        width: 'calc(100% - 240px)',
         boxShadow: 1,
+        backgroundColor: 'background.paper',
       }}
-      spacing={2}
     >
-      <Stack
-        direction="row"
+      <Toolbar
         sx={{
-          flexGrow: 1, // Ensures the breadcrumbs and search align properly
+          display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
+          px: 2,
         }}
       >
         <NavbarBreadcrumbs breadcrumbs={getBreadcrumbs()} />
-        <Stack direction="row" sx={{ gap: 1 }}>
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          {location.pathname === '/tasks' && (
+            <>
+              <Button variant="contained" color="primary" onClick={handleDialogOpen}>
+                Add New Task
+              </Button>
+              <Dialog open={isDialogOpen} onClose={handleDialogClose} fullWidth maxWidth="sm">
+                <DialogTitle>Add New Task</DialogTitle>
+                <DialogContent>
+                  <AddTodo
+                    onAddTodo={(newTodo: Omit<Todo, 'id' | 'createdAt' | 'completedAt'>) => {
+                      handleDialogClose();
+                    }}
+                    existingTodos={[]}
+                  />
+                </DialogContent>
+              </Dialog>
+            </>
+          )}
           <CustomDatePicker />
           <MenuButton showBadge aria-label="Open notifications">
             <NotificationsRoundedIcon />
           </MenuButton>
           <ColorModeIconDropdown />
-        </Stack>
-      </Stack>
-    </Stack>
+        </Box>
+      </Toolbar>
+      {children && <Box sx={{ mt: 2 }}>{children}</Box>}
+    </AppBar>
   );
 }

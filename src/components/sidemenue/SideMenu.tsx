@@ -27,7 +27,7 @@ const Drawer = styled(MuiDrawer)({
   },
 });
 
-export default function SideMenu() {
+export default function SideMenu({ children }: { children?: React.ReactNode }) {
   const navigate = useNavigate();
 
   return (
@@ -37,17 +37,22 @@ export default function SideMenu() {
         display: { xs: 'none', md: 'block' },
         [`& .${drawerClasses.paper}`]: {
           backgroundColor: 'background.paper',
+          maxWidth: '240px',
         },
       }}
     >
       <Box
         sx={{
           p: 2,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
-        <Search /> {/* Added Search component */}
+        <Search />
       </Box>
       <MenuContent />
+      {children && <Box sx={{ p: 2 }}>{children}</Box>} {/* Render children */}
       <Stack
         direction="row"
         sx={{
