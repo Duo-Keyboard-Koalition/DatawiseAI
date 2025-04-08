@@ -28,14 +28,9 @@
     "typescript": "^5.0.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
     "dev": "vite"
   },
   "devDependencies": {
-    "react-scripts": "latest",
     "vite": "^6.2.5"
   },
   "browserslist": {
